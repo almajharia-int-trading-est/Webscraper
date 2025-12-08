@@ -54,6 +54,8 @@ class Program
                     results.Add("[NOT FOUND]");
             }
 
+            Console.WriteLine(body.ToString()[200]);
+
             // Print results
             foreach (var item in results)
             {
