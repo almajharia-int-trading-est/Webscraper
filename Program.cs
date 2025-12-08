@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using HtmlAgilityPack;
 
 class Program
 {
@@ -29,7 +30,37 @@ class Program
                 new StringContent(json, Encoding.UTF8, "application/json"));
 
             var body = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(body);
+
+            // Load HTML
+            var html = new HtmlDocument();
+            html.LoadHtml(body);
+
+            // XPaths
+            var xpaths = new[]
+            {
+                "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[1]/h1",
+                "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span",
+                "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span"
+            };
+
+            var results = new List<string>();
+
+            foreach (var xp in xpaths)
+            {
+                var node = html.DocumentNode.SelectSingleNode(xp);
+                if (node != null)
+                    results.Add(node.InnerText.Trim());
+                else
+                    results.Add("[NOT FOUND]");
+            }
+
+            // Print results
+            foreach (var item in results)
+            {
+                Console.WriteLine(item);
+            }
+
+            break;
         }
     }
 }
