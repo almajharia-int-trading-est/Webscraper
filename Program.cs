@@ -38,9 +38,9 @@ class Program
             // XPaths
             var xpaths = new[]
             {
-                "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[1]/h1",
-                "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span",
-                "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span"
+                "//*[@id=\"root\"]/",
+                //"//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span",
+                //"//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span"
             };
 
             var results = new List<string>();
