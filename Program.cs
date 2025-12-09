@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
+using System.IO;
 using System.Net.Http;
 using System.Text;
-using HtmlAgilityPack;
 
 class Program
 {
@@ -55,6 +56,10 @@ class Program
             }
 
             Console.WriteLine(body.ToString()[200]);
+
+            string path = "html-output.txt";
+
+            File.WriteAllText(path, body.ToString());
 
             // Print results
             foreach (var item in results)
