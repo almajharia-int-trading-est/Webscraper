@@ -32,40 +32,40 @@ class Program
 
             var body = await response.Content.ReadAsStringAsync();
 
-            // Load HTML
-            var html = new HtmlDocument();
-            html.LoadHtml(body);
+            //// Load HTML
+            //var html = new HtmlDocument();
+            //html.LoadHtml(body);
 
-            // XPaths
-            var xpaths = new[]
-            {
-                "//*[@id=\"root\"]/",
-                "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span",
-                "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span"
-            };
+            //// XPaths
+            //var xpaths = new[]
+            //{
+            //    "//*[@id=\"root\"]/",
+            //    "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span",
+            //    "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span"
+            //};
 
-            var results = new List<string>();
+            //var results = new List<string>();
 
-            foreach (var xp in xpaths)
-            {
-                var node = html.DocumentNode.SelectSingleNode(xp);
-                if (node != null)
-                    results.Add(node.InnerText.Trim());
-                else
-                    results.Add("[NOT FOUND]");
-            }
+            //foreach (var xp in xpaths)
+            //{
+            //    var node = html.DocumentNode.SelectSingleNode(xp);
+            //    if (node != null)
+            //        results.Add(node.InnerText.Trim());
+            //    else
+            //        results.Add("[NOT FOUND]");
+            //}
 
-            Console.WriteLine(body.ToString()[200]);
+            Console.WriteLine(body.ToString());
 
             string path = "html-output.txt";
 
             File.WriteAllText(path, body.ToString());
 
-            // Print results
-            foreach (var item in results)
-            {
-                Console.WriteLine(item);
-            }
+            //// Print results
+            //foreach (var item in results)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
             break;
         }
