@@ -32,9 +32,9 @@ class Program
 
             var body = await response.Content.ReadAsStringAsync();
 
-            //// Load HTML
-            //var html = new HtmlDocument();
-            //html.LoadHtml(body);
+            // Load HTML
+            var html = new HtmlDocument();
+            html.LoadHtml(body);
 
             //// XPaths
             //var xpaths = new[]
