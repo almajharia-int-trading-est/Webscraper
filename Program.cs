@@ -55,11 +55,11 @@ class Program
             //        results.Add("[NOT FOUND]");
             //}
 
-            Console.WriteLine(html.ToString());
+            Console.WriteLine(html.DocumentNode.OuterHtml);
 
             string path = "html-output.txt";
 
-            File.WriteAllText(path, html.ToString());
+            File.WriteAllText(path, html.DocumentNode.OuterHtml);
 
             //// Print results
             //foreach (var item in results)
