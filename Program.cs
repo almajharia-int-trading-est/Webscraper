@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -45,27 +46,40 @@ class Program
 
 
 
-            Console.WriteLine(html.DocumentNode.OuterHtml);
+            //Console.WriteLine(html.DocumentNode.OuterHtml);
 
-            //// XPaths
-            //var xpaths = new[]
-            //{
-            //    "//*[@id=\"root\"]/",
-            //    "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span",
-            //    "//*[@id=\"root\"]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div/table/tbody/tr/td[1]/span"
-            //};
+            // Product Title
+            string title = html.DocumentNode.SelectSingleNode("//title")?.InnerText?.Trim();
+            Console.WriteLine("Title: " + title);
 
-            //var results = new List<string>();
+            // Meta Description
+            string description =
+                html.DocumentNode.SelectSingleNode("//meta[@name='description']")
+                ?.GetAttributeValue("content", "")
+                ?.Trim();
+            Console.WriteLine("Description: " + description);
 
-            //foreach (var xp in xpaths)
-            //{
-            //    var node = html.DocumentNode.SelectSingleNode(xp);
-            //    if (node != null)
-            //        results.Add(node.InnerText.Trim());
-            //    else
-            //        results.Add("[NOT FOUND]");
-            //}
+            // Image
+            string image =
+                html.DocumentNode.SelectSingleNode("//meta[@property='og:image']")
+                ?.GetAttributeValue("content", "");
+            Console.WriteLine("Image: " + image);
 
+            // Product SKU
+            string sku =
+                html.DocumentNode.SelectSingleNode("//script[@type='application/ld+json']")
+                ?.InnerText;
+
+            if (sku != null)
+            {
+                try
+                {
+                    var structured = JObject.Parse(sku);
+                    Console.WriteLine("SKU: " + structured["sku"]);
+                    Console.WriteLine("MPN: " + structured["mpn"]);
+                }
+                catch { }
+            }
 
 
 
