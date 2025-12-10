@@ -32,9 +32,20 @@ class Program
 
             var body = await response.Content.ReadAsStringAsync();
 
+
+            // Parse FlareSolverr JSON
+            dynamic result = JsonConvert.DeserializeObject(body);
+
+            // Extract actual HTML
+            string htmlContent = result.solution.response;
+
             // Load HTML
             var html = new HtmlDocument();
-            html.LoadHtml(body);
+            html.LoadHtml(htmlContent);
+
+
+
+            Console.WriteLine(html.DocumentNode.OuterHtml);
 
             //// XPaths
             //var xpaths = new[]
@@ -55,7 +66,9 @@ class Program
             //        results.Add("[NOT FOUND]");
             //}
 
-            Console.WriteLine(html.DocumentNode.OuterHtml);
+
+
+
 
             string path = "html-output.txt";
 
